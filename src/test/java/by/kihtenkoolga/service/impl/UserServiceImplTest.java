@@ -16,8 +16,7 @@ import java.util.Optional;
 
 import static by.kihtenkoolga.util.UserTestBuilder.ALL_DB_USERS;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class UserServiceImplTest {
@@ -143,10 +142,7 @@ class UserServiceImplTest {
                     .when(userDAO)
                     .deleteById(null);
 
-            assertThrows(
-                    NullPointerException.class,
-                    () -> userService.deleteById(null)
-            );
+            assertDoesNotThrow(() -> userService.deleteById(null));
         }
     }
 }

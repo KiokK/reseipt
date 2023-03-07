@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Nested;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 class LFUCacheHandlerTest {
 
@@ -39,6 +40,12 @@ class LFUCacheHandlerTest {
             assertThat(lfu.getCacheBase().get(uId))
                     .isEqualTo(new CacheValue<>(2L, userId1));
         }
+
+        @Test
+        void checkGetByNull() {
+            assertThat(lfu.getCacheBase().get(null))
+                    .isEqualTo(null);
+        }
     }
 
     @Nested
@@ -53,6 +60,22 @@ class LFUCacheHandlerTest {
 
             assertThat(lfu.getCacheBase().size())
                     .isEqualTo(3);
+        }
+
+        @Test
+        void checkPutNullId() {
+            lfu.put(null, null);
+
+            assertThat(lfu.getCacheBase().size())
+                    .isEqualTo(0);
+        }
+
+        @Test
+        void checkPutNullValue() {
+            lfu.put(1L, null);
+
+            assertThat(lfu.getCacheBase().size())
+                    .isEqualTo(0);
         }
     }
 
@@ -78,10 +101,15 @@ class LFUCacheHandlerTest {
             lfu.get(userId2.getId());
             lfu.put(userId3.getId(), userId3);
 
-            lfu.put(userId4.getId(), userId3);
+            lfu.put(userId4.getId(), userId4);
 
             assertThat(lfu.getCacheBase().get(userId3.getId()))
                     .isNull();
+        }
+
+        @Test
+        void checkRemoveByNull() {
+            assertDoesNotThrow(() -> lfu.remove(null));
         }
     }
 }

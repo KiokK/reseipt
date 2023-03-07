@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * Класс <code>LFUCache</code> кэширует объекты подсчитывает частоту использования каждого элемента
+ * Класс <code>LFUCacheHandler</code> кэширует объекты подсчитывает частоту использования каждого элемента
  * и удаляет те, к которым обращаются реже всего
  */
 @Getter
@@ -25,6 +25,8 @@ public class LFUCacheHandler<K, V> implements CacheHandler<K, V> {
 
     @Override
     public V put(K key, V value) {
+        if (key == null || value == null)
+            return null;
         CacheValue<Long, V> findCashValue = cacheBase.get(key);
         if (findCashValue == null || value != findCashValue.getValue())
             add(key, value);
@@ -51,7 +53,7 @@ public class LFUCacheHandler<K, V> implements CacheHandler<K, V> {
 
     /**
      * Добавляет в кэш или обноввляет в нем новое значение
-     * @param key id, кэшируемого, объекта
+     * @param key id, кэшируемого, объекта, не null
      * @param value кэшируемый объект
      */
     private void add(K key, V value) {
