@@ -12,9 +12,9 @@ import java.util.stream.Collectors;
 @Component
 public class UserDAOImpl implements UserDAO{
     private HashMap<Long, User> userBase = new HashMap<>() {{
-        put(1L, new User(1L, "Ivan", "Ivanov", "+375257892145", "IvanovIvan@mail.ru"));
-        put(2L, new User(2L, "Boris", "Borisov", "+375337892145", "borisovich82@mail.ru"));
-        put(3L, new User(3L, "Kirill", "Kirillenko", "+375297892145", "kirilenko@gmail.com"));
+        put(1L, User.builder().id(1L).name("Bob").surname("Biba").phoneNumber("+375330987623").email("dsadiu@gmail.com").build());
+        put(2L, new User(2L, "Viva", "Vovo", "+375330007623", "asddiu@gmail.com"));
+        put(3L, new User(3L, "Chery", "Apple", "+375330900023", "diasdu@gmail.com"));
     }};
 
     private long nextId = 4;

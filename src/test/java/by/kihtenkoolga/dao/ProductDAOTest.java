@@ -25,7 +25,6 @@ class ProductDAOTest {
 
         @Test
         void checkFindByNameReturnNotEmpty() {
-            System.out.println(productDAO.findAll());
             Optional<Product> product = productDAO.findByName("Plate");
             Assertions.assertThat(product)
                     .isNotEmpty();
@@ -34,7 +33,6 @@ class ProductDAOTest {
         @Test
         void checkFindByNameReturnExpectedObject() {
             Optional<Product> product = productDAO.findByName("Plate");
-            System.out.println(product);
             Assertions.assertThat(product.get())
                     .isEqualTo(expectedProduct);
         }

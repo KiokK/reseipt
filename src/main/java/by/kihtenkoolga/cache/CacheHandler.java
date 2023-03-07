@@ -10,9 +10,10 @@ public interface CacheHandler<K, V> {
     /**
      * Вставка объекта в кэш
      * @param key id объекта
-     * @param value объект
+     * @param value объект, который кэшируем
+     * @return <code>value</code>
      */
-    void put(K key, V value);
+    V put(K key, V value);
 
     /**
      * Получение объекта из кэша

@@ -24,12 +24,13 @@ public class LFUCacheHandler<K, V> implements CacheHandler<K, V> {
     }
 
     @Override
-    public void put(K key, V value) {
+    public V put(K key, V value) {
         CacheValue<Long, V> findCashValue = cacheBase.get(key);
         if (findCashValue == null || value != findCashValue.getValue())
             add(key, value);
         else
             upCountOfUseObject(key);
+        return value;
     }
 
     @Override
