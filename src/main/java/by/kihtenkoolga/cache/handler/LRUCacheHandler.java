@@ -1,4 +1,4 @@
-package by.kihtenkoolga.cache.impl;
+package by.kihtenkoolga.cache.handler;
 
 import by.kihtenkoolga.cache.CacheHandler;
 import by.kihtenkoolga.cache.CacheValue;

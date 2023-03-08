@@ -1,4 +1,4 @@
-package by.kihtenkoolga.cache.impl;
+package by.kihtenkoolga.cache.handler;
 
 import by.kihtenkoolga.cache.CacheValue;
 import by.kihtenkoolga.model.User;
