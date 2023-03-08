@@ -17,6 +17,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'junit:junit:4.13.1'
     implementation 'junit:junit:4.13.1'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
     compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
     runtimeOnly 'org.postgresql:postgresql'

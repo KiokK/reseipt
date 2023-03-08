@@ -6,6 +6,7 @@ import by.kihtenkoolga.model.Shop;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.Map;
 /**Абстрактный класс чека с информационными полями*/
 @Getter
 @Setter
+@XmlRootElement(name = "CashRegister")
 public abstract class CashRegister {
     Double price = 0.0;
     Double discount = 0.0;
