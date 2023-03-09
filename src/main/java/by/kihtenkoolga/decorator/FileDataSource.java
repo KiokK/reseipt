@@ -27,9 +27,10 @@ public class FileDataSource implements DataSource {
         try {
             this.inputName = appArgs.getSourceArgs()[0];
             if (appArgs.getSourceArgs().length == 1)
-                this.outputName = appArgs.getSourceArgs()[1];
-            else
                 this.outputName = "OUTPUT"+appArgs.getSourceArgs()[0];
+            else
+            if (appArgs.getSourceArgs().length >= 2)
+                this.outputName = appArgs.getSourceArgs()[1];
         }catch (Exception e) {
             System.out.println(e.getMessage());
         }
