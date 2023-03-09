@@ -33,15 +33,14 @@ public class LRUCacheHandler<K, V> implements CacheHandler<K, V> {
 
     @Override
     public V get(K key) {
-        V findValue = (V) cacheBase.getOrDefault(key, null);
+        CacheValue<K, V> findValue = cacheBase.get(key);
         if (findValue == null)
             return null;
 
-        CacheValue<K, V> cacheValue = new CacheValue<>(key, findValue);
-        cacheBase.remove(cacheValue);
-        cacheBase.put(key, cacheValue);
+        cacheBase.remove(findValue);
+        cacheBase.put(key, findValue);
 
-        return findValue;
+        return findValue.getValue();
     }
 
     @Override
@@ -54,7 +53,7 @@ public class LRUCacheHandler<K, V> implements CacheHandler<K, V> {
      * @return ключ кэшируемого объекта
      */
     private K getKeyOfFirst(){
-        return cacheBase.entrySet().stream().findFirst().get().getKey();
+        return cacheBase.entrySet().iterator().next().getKey();
     }
 
 }

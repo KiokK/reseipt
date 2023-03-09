@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 @Getter
 public class LFUCacheHandler<K, V> implements CacheHandler<K, V> {
 
+    /** K - id объекта, V - объект, CacheValue.key - частота использования объекта */
     private Map<K, CacheValue<Long, V>> cacheBase = new HashMap<>();
 
     private final int CACHE_CAPACITY;
@@ -31,7 +32,7 @@ public class LFUCacheHandler<K, V> implements CacheHandler<K, V> {
         if (findCashValue == null || value != findCashValue.getValue())
             add(key, value);
         else
-            upCountOfUseObject(key);
+            increase(key);
         return value;
     }
 
@@ -41,7 +42,7 @@ public class LFUCacheHandler<K, V> implements CacheHandler<K, V> {
             return null;
 
         CacheValue<Long, V> cacheValue = cacheBase.get(key);
-        upCountOfUseObject(key);
+        increase(key);
 
         return cacheValue.getValue();
     }
@@ -70,19 +71,18 @@ public class LFUCacheHandler<K, V> implements CacheHandler<K, V> {
         if (cacheBase.isEmpty())
             return null;
 
-        K key = cacheBase.entrySet().stream()
+        return cacheBase.entrySet().stream()
                 .sorted((o1, o2) -> (int) (o1.getValue().getKey() - o2.getValue().getKey()))
                 .collect(Collectors.toList())
                 .get(0)
                 .getKey();
-        return key;
     }
 
     /**
      * Увеличивает частоту использований кэшируемого объекта
      * @param key id кэшируемого объекта
      */
-    private void upCountOfUseObject(K key) {
+    private void increase(K key) {
         CacheValue<Long, V> cacheValue = cacheBase.get(key);
         cacheValue.setKey(cacheValue.getKey() + 1);
     }
